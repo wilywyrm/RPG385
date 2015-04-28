@@ -16,4 +16,21 @@ typedef struct Event {
 } Event;
 
 
+const char* eventTexts[] = {
+		"Welcome to RPG385!",
+		"",
+};
+
+const char* choiceTexts[] = {
+		"as",
+		"sd",
+		"df",
+		"TURN UP"
+};
+
+const char* choiceResponses[] = {
+		"\n",
+		"How original.",
+};
+
 #endif

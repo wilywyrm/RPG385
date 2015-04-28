@@ -14,33 +14,17 @@
 #include "data.h"
 
 int week = 0;
+
 int health = 100;
 int hygiene = 100;
 int happiness = 100;
 int grades = 100;
+
 int difficulty = 0;
 
 
-
-char* eventTexts[] = {
-		"Welcome to RPG385!\n",
-		"",
-};
-
-char* choiceTexts[] = {
-		"",
-		"",
-		"",
-		"TURN UP"
-};
-
-char* choiceResponses[] = {
-		"Welcome to RPG385!\n",
-		"",
-};
-
-Event* e[16];
-
+Event* ev[16];
+Event* curE;
 
 Event* Event_new(int eventTextI, int choiceTextI[], int choiceResponsesI[], int choiceNextEventI[]){
 	Event* e = malloc(sizeof(Event));
@@ -55,6 +39,8 @@ Event* Event_new(int eventTextI, int choiceTextI[], int choiceResponsesI[], int 
 		c[i].nextEventI = choiceNextEventI[i];
 	}
 
+	//printf("%i\n", c[0].textI);
+
 	return e;
 }
 
@@ -63,20 +49,34 @@ void initEvents(){
 	int* cRI;	// choice response indices
 	int* cNI;	// choice next event indices
 
-	cTI = (int[4]) {1, 2, 3, 4};
-	cRI = (int[4]) {1, 2, 3, 4};
+	cTI = (int[4]) {0, 1, 2, 3};
+	cRI = (int[4]) {0, 1, 2, 3};
 	cNI = (int[4]) {1, 1, 1, 1};
-	e[0] = Event_new(0, cTI, cRI, cNI);
+	ev[0] = Event_new(0, cTI, cRI, cNI);
+	//int i = 0;
+	//Choice* a = ev[0]->choices;
+	//for(i = 0; i < 4; i++){
+	//	prints("%i %c. %s\n", i, (char)(i+97), choiceTexts[(a[i]).textI]);
+	//}
 }
 
 void prints(const char *format, ...){
 	va_list arg;
-	printf(format, arg);
+	va_start(arg, format);
+	vprintf(format, arg); // printf doesn't work like you want it to
+	va_end(arg);
+}
+
+void printChoices(Event* e){
+	int i = 0;
+	Choice* a = e->choices;
+	for(i = 0; i < 4; i++){
+		prints("%c. %s\n", (char)(i+97), choiceTexts[(a[i]).textI]);
+	}
+	prints("\n\n");
 }
 
 char getIn(){
-	//prints("What do you choose? ");
-
 	char buf[80] = "boo invalid value";
 	//scanf("%s", buf);
 
@@ -86,7 +86,6 @@ char getIn(){
 		scanf("%s", buf);
 	}
 
-	//printf("%c\n", buf[0]);
 	return buf[0];
 }
 
@@ -95,25 +94,33 @@ void drawScreen(){
 	for(i = 0; i < 20; i++){
 		printf("\n");
 	}
+
+	printf("Week %i: \n\n", week);
+	printf("%s\n\n", eventTexts[curE->promptI]);
+	printChoices(curE);
+}
+
+void waitEnter(){
+	printf("Press enter to continue... ");
+	int i = 0;
+	while(getchar() == "\n"){
+		i++;
+	}
+	getchar();
 }
 
 
 int main(void) {
 	initEvents();
+	curE = ev[0];
 
 	prints(eventTexts[0]);
 
 	while(week < 15){
-		char userSel[80];
+		char userSel;
 		//drawScreen();
-		userSel[0] = getIn();
-		printf("Press enter to continue... ");
-		while(getchar() == "\n"){
-			userSel[0] = userSel[0];
-			//userSel[0] = getchar();
-		}//while(userSel[0] == "\n");
-		getchar();
-
+		userSel = getIn();
+		waitEnter();
 		week++;
 	}
 
