@@ -1,0 +1,34 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst Video_System.Pixel_Scaler -pg 1 -lvl 5 -y 210
+preplace inst Video_System.Onchip_Memory -pg 1 -lvl 8 -y 520
+preplace inst Video_System.video_pll_0 -pg 1 -lvl 3 -y 50
+preplace inst Video_System.clk_0 -pg 1 -lvl 1 -y 470
+preplace inst Video_System.VGA_Controller -pg 1 -lvl 8 -y 90
+preplace inst Video_System.Pixel_RGB_Resampler -pg 1 -lvl 4 -y 190
+preplace inst Video_System.video_pll_0.reset_from_locked -pg 1
+preplace inst Video_System.Pixel_Buffer_DMA -pg 1 -lvl 3 -y 260
+preplace inst Video_System.Dual_Clock_FIFO -pg 1 -lvl 7 -y 250
+preplace inst Video_System.Char_Buffer_with_DMA -pg 1 -lvl 5 -y 310
+preplace inst Video_System.CPU -pg 1 -lvl 2 -y 170
+preplace inst Video_System -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst Video_System.video_pll_0.video_pll -pg 1
+preplace inst Video_System.Pixel_Buffer -pg 1 -lvl 8 -y 410
+preplace inst Video_System.Alpha_Blender -pg 1 -lvl 6 -y 230
+preplace netloc FAN_OUT<net_container>Video_System</net_container>(MASTER)video_pll_0.reset_source,(SLAVE)VGA_Controller.reset,(SLAVE)Dual_Clock_FIFO.reset_stream_out) 1 3 5 1190 160 NJ 160 NJ 160 2210 120 NJ
+preplace netloc FAN_OUT<net_container>Video_System</net_container>(SLAVE)Dual_Clock_FIFO.clock_stream_out,(SLAVE)VGA_Controller.clk,(MASTER)video_pll_0.vga_clk) 1 3 5 1130 180 NJ 180 NJ 180 2170 100 NJ
+preplace netloc POINT_TO_POINT<net_container>Video_System</net_container>(SLAVE)Pixel_RGB_Resampler.avalon_rgb_sink,(MASTER)Pixel_Buffer_DMA.avalon_pixel_source) 1 3 1 1190
+preplace netloc POINT_TO_POINT<net_container>Video_System</net_container>(MASTER)Dual_Clock_FIFO.avalon_dc_buffer_source,(SLAVE)VGA_Controller.avalon_vga_sink) 1 7 1 2580
+preplace netloc EXPORT<net_container>Video_System</net_container>(SLAVE)Video_System.VGA_Controller_external_interface,(SLAVE)VGA_Controller.external_interface) 1 0 8 NJ 140 NJ 140 NJ 140 NJ 140 NJ 140 NJ 140 NJ 140 NJ
+preplace netloc POINT_TO_POINT<net_container>Video_System</net_container>(SLAVE)Pixel_Scaler.avalon_scaler_sink,(MASTER)Pixel_RGB_Resampler.avalon_rgb_source) 1 4 1 NJ
+preplace netloc EXPORT<net_container>Video_System</net_container>(SLAVE)clk_0.clk_in_reset,(SLAVE)Video_System.clk_0_clk_in_reset) 1 0 1 NJ
+preplace netloc INTERCONNECT<net_container>Video_System</net_container>(SLAVE)video_pll_0.ref_reset,(MASTER)clk_0.clk_reset,(SLAVE)CPU.reset_n,(SLAVE)Pixel_Buffer_DMA.reset,(SLAVE)Onchip_Memory.reset1,(SLAVE)Alpha_Blender.reset,(SLAVE)Pixel_RGB_Resampler.reset,(SLAVE)Pixel_Buffer.reset,(MASTER)CPU.jtag_debug_module_reset,(SLAVE)Pixel_Scaler.reset,(SLAVE)Char_Buffer_with_DMA.reset,(SLAVE)Dual_Clock_FIFO.reset_stream_in) 1 1 7 430 320 740 230 1150 330 1430 300 1790 360 2230 480 2580
+preplace netloc FAN_OUT<net_container>Video_System</net_container>(MASTER)clk_0.clk,(SLAVE)Pixel_Buffer.clk,(SLAVE)Dual_Clock_FIFO.clock_stream_in,(SLAVE)Pixel_Buffer_DMA.clk,(SLAVE)Pixel_RGB_Resampler.clk,(SLAVE)Pixel_Scaler.clk,(SLAVE)Alpha_Blender.clk,(SLAVE)Onchip_Memory.clk1,(SLAVE)CPU.clk,(SLAVE)Char_Buffer_with_DMA.clk,(SLAVE)video_pll_0.ref_clk) 1 1 7 410 160 720 210 1170 310 1390 420 1810 340 2190 400 2560
+preplace netloc INTERCONNECT<net_container>Video_System</net_container>(SLAVE)Pixel_Buffer_DMA.avalon_control_slave,(SLAVE)Char_Buffer_with_DMA.avalon_char_control_slave,(SLAVE)CPU.jtag_debug_module,(SLAVE)Char_Buffer_with_DMA.avalon_char_buffer_slave,(MASTER)Pixel_Buffer_DMA.avalon_pixel_dma_master,(MASTER)CPU.instruction_master,(MASTER)CPU.data_master,(SLAVE)Pixel_Buffer.avalon_sram_slave,(SLAVE)Onchip_Memory.s1) 1 1 7 450 300 700 250 1130 290 1410 440 NJ 380 NJ 380 2540
+preplace netloc EXPORT<net_container>Video_System</net_container>(SLAVE)clk_0.clk_in,(SLAVE)Video_System.clk_0_clk_in) 1 0 1 NJ
+preplace netloc EXPORT<net_container>Video_System</net_container>(SLAVE)Pixel_Buffer.external_interface,(SLAVE)Video_System.Pixel_Buffer_external_interface) 1 0 8 NJ 460 NJ 460 NJ 460 NJ 460 NJ 460 NJ 460 NJ 460 NJ
+preplace netloc POINT_TO_POINT<net_container>Video_System</net_container>(MASTER)Char_Buffer_with_DMA.avalon_char_source,(SLAVE)Alpha_Blender.avalon_foreground_sink) 1 5 1 1770
+preplace netloc POINT_TO_POINT<net_container>Video_System</net_container>(MASTER)Alpha_Blender.avalon_blended_source,(SLAVE)Dual_Clock_FIFO.avalon_dc_buffer_sink) 1 6 1 NJ
+preplace netloc POINT_TO_POINT<net_container>Video_System</net_container>(SLAVE)Alpha_Blender.avalon_background_sink,(MASTER)Pixel_Scaler.avalon_scaler_source) 1 5 1 N
+levelinfo -pg 1 0 200 2780
+levelinfo -hier Video_System 210 240 480 820 1220 1460 1860 2260 2620 2770

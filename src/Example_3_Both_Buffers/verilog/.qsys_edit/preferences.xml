@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable filter="All Interfaces">
+  <columns>
+   <connections preferredWidth="319" />
+   <irq preferredWidth="34" />
+   <inputclock preferredWidth="98" />
+   <export preferredWidth="130" />
+   <description preferredWidth="89" />
+  </columns>
+ </systemtable>
+ <library
+   expandedCategories="Library/Processors and Peripherals/Peripherals,Library/Processors and Peripherals,Library,Project" />
+ <window width="947" height="1076" x="55" y="14" />
+ <generation path="_PROJECT_NAME_" />
+</preferences>

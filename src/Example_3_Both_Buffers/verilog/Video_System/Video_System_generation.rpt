@@ -1,0 +1,198 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: ip-generate --project-directory=/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog --output-directory=/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System --report-file=bsf:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/Video_System.bsf --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE115F29C7 --system-info=DEVICE_SPEEDGRADE=7 --component-file=/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System.qsys
+Progress: Loading verilog/Video_System.qsys
+Progress: Reading input file
+Progress: Adding Alpha_Blender [altera_up_avalon_video_alpha_blender 14.0]
+Progress: Parameterizing module Alpha_Blender
+Progress: Adding CPU [altera_nios2_qsys 14.0]
+Progress: Parameterizing module CPU
+Progress: Adding Char_Buffer_with_DMA [altera_up_avalon_video_character_buffer_with_dma 14.0]
+Progress: Parameterizing module Char_Buffer_with_DMA
+Progress: Adding Dual_Clock_FIFO [altera_up_avalon_video_dual_clock_buffer 14.0]
+Progress: Parameterizing module Dual_Clock_FIFO
+Progress: Adding Pixel_Buffer [altera_up_avalon_sram 14.0]
+Progress: Parameterizing module Pixel_Buffer
+Progress: Adding Pixel_Buffer_DMA [altera_up_avalon_video_pixel_buffer_dma 14.0]
+Progress: Parameterizing module Pixel_Buffer_DMA
+Progress: Adding Pixel_RGB_Resampler [altera_up_avalon_video_rgb_resampler 14.0]
+Progress: Parameterizing module Pixel_RGB_Resampler
+Progress: Adding Pixel_Scaler [altera_up_avalon_video_scaler 14.0]
+Progress: Parameterizing module Pixel_Scaler
+Progress: Adding VGA_Controller [altera_up_avalon_video_vga_controller 14.0]
+Progress: Parameterizing module VGA_Controller
+Progress: Adding clk_0 [clock_source 14.0]
+Progress: Parameterizing module clk_0
+Progress: Adding video_pll_0 [altera_up_avalon_video_pll 14.0]
+Progress: Parameterizing module video_pll_0
+Progress: Adding keycode [altera_avalon_pio 14.0]
+Progress: Parameterizing module keycode
+Progress: Adding sdram_controller_0 [altera_avalon_new_sdram_controller 14.0]
+Progress: Parameterizing module sdram_controller_0
+Progress: Adding sdram_clk [altpll 14.0]
+Progress: Parameterizing module sdram_clk
+Progress: Adding sdram_clock_bridge [altera_clock_bridge 14.0]
+Progress: Parameterizing module sdram_clock_bridge
+Progress: Adding press [altera_avalon_pio 14.0]
+Progress: Parameterizing module press
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: Video_System.CPU: Please note that for early evaluation, preview versions of new Nios II Gen2 Processors are available with this release.
+Info: Video_System.CPU: CPUID control register value is 0. Please manually assign CPUID if creating multiple Nios II system
+Info: Video_System.Char_Buffer_with_DMA: Character Resolution: 80 x 60
+Info: Video_System.Pixel_RGB_Resampler: RGB Resampling: 16 (bits) x 1 (planes) -> 10 (bits) x 3 (planes)
+Info: Video_System.Pixel_Scaler: Change in Resolution: 320 x 240 -> 640 x 480
+Info: Video_System.VGA_Controller: Video Output Stream: Format: 640 x 480 with Color: 10 (bits) x 3 (planes) converted to 8 (bits) per color plane
+Info: Video_System.keycode: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: Video_System.press: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Warning: Video_System.sdram_clk: sdram_clk.areset_conduit must be exported, or connected to a matching conduit.
+Warning: Video_System.sdram_clk: sdram_clk.locked_conduit must be exported, or connected to a matching conduit.
+Warning: Video_System.sdram_clk: sdram_clk.phasedone_conduit must be exported, or connected to a matching conduit.
+Info: ip-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: ip-generate --project-directory=/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog --output-directory=/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis --file-set=QUARTUS_SYNTH --report-file=html:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/Video_System.html --report-file=sopcinfo:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System.sopcinfo --report-file=cmp:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/Video_System.cmp --report-file=qip:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/Video_System.qip --report-file=svd:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/Video_System.svd --report-file=regmap:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/Video_System.regmap --report-file=xml:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/Video_System.xml --report-file=debuginfo:/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/Video_System.debuginfo --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE115F29C7 --system-info=DEVICE_SPEEDGRADE=7 --component-file=/home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System.qsys --language=VERILOG
+Progress: Loading verilog/Video_System.qsys
+Progress: Reading input file
+Progress: Adding Alpha_Blender [altera_up_avalon_video_alpha_blender 14.0]
+Progress: Parameterizing module Alpha_Blender
+Progress: Adding CPU [altera_nios2_qsys 14.0]
+Progress: Parameterizing module CPU
+Progress: Adding Char_Buffer_with_DMA [altera_up_avalon_video_character_buffer_with_dma 14.0]
+Progress: Parameterizing module Char_Buffer_with_DMA
+Progress: Adding Dual_Clock_FIFO [altera_up_avalon_video_dual_clock_buffer 14.0]
+Progress: Parameterizing module Dual_Clock_FIFO
+Progress: Adding Pixel_Buffer [altera_up_avalon_sram 14.0]
+Progress: Parameterizing module Pixel_Buffer
+Progress: Adding Pixel_Buffer_DMA [altera_up_avalon_video_pixel_buffer_dma 14.0]
+Progress: Parameterizing module Pixel_Buffer_DMA
+Progress: Adding Pixel_RGB_Resampler [altera_up_avalon_video_rgb_resampler 14.0]
+Progress: Parameterizing module Pixel_RGB_Resampler
+Progress: Adding Pixel_Scaler [altera_up_avalon_video_scaler 14.0]
+Progress: Parameterizing module Pixel_Scaler
+Progress: Adding VGA_Controller [altera_up_avalon_video_vga_controller 14.0]
+Progress: Parameterizing module VGA_Controller
+Progress: Adding clk_0 [clock_source 14.0]
+Progress: Parameterizing module clk_0
+Progress: Adding video_pll_0 [altera_up_avalon_video_pll 14.0]
+Progress: Parameterizing module video_pll_0
+Progress: Adding keycode [altera_avalon_pio 14.0]
+Progress: Parameterizing module keycode
+Progress: Adding sdram_controller_0 [altera_avalon_new_sdram_controller 14.0]
+Progress: Parameterizing module sdram_controller_0
+Progress: Adding sdram_clk [altpll 14.0]
+Progress: Parameterizing module sdram_clk
+Progress: Adding sdram_clock_bridge [altera_clock_bridge 14.0]
+Progress: Parameterizing module sdram_clock_bridge
+Progress: Adding press [altera_avalon_pio 14.0]
+Progress: Parameterizing module press
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: Video_System.CPU: Please note that for early evaluation, preview versions of new Nios II Gen2 Processors are available with this release.
+Info: Video_System.CPU: CPUID control register value is 0. Please manually assign CPUID if creating multiple Nios II system
+Info: Video_System.Char_Buffer_with_DMA: Character Resolution: 80 x 60
+Info: Video_System.Pixel_RGB_Resampler: RGB Resampling: 16 (bits) x 1 (planes) -> 10 (bits) x 3 (planes)
+Info: Video_System.Pixel_Scaler: Change in Resolution: 320 x 240 -> 640 x 480
+Info: Video_System.VGA_Controller: Video Output Stream: Format: 640 x 480 with Color: 10 (bits) x 3 (planes) converted to 8 (bits) per color plane
+Info: Video_System.keycode: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: Video_System.press: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Warning: Video_System.sdram_clk: sdram_clk.areset_conduit must be exported, or connected to a matching conduit.
+Warning: Video_System.sdram_clk: sdram_clk.locked_conduit must be exported, or connected to a matching conduit.
+Warning: Video_System.sdram_clk: sdram_clk.phasedone_conduit must be exported, or connected to a matching conduit.
+Info: Video_System: Generating Video_System "Video_System" for QUARTUS_SYNTH
+Info: Inserting clock-crossing logic between cmd_demux.src7 and cmd_mux_007.sink0
+Info: Inserting clock-crossing logic between cmd_demux_001.src2 and cmd_mux_007.sink1
+Info: Inserting clock-crossing logic between rsp_demux_007.src0 and rsp_mux.sink7
+Info: Inserting clock-crossing logic between rsp_demux_007.src1 and rsp_mux_001.sink2
+Info: Alpha_Blender: Starting Generation of the Alpha Blender
+Info: Alpha_Blender: "Video_System" instantiated altera_up_avalon_video_alpha_blender "Alpha_Blender"
+Info: CPU: Starting RTL generation for module 'Video_System_CPU'
+Info: CPU:   Generation command is [exec /home/wilywyrm/altera/14.0/quartus/linux64/eperlcmd -I /home/wilywyrm/altera/14.0/quartus/linux64/perl/lib -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin/europa -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin/perl_lib -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin -I /home/wilywyrm/altera/14.0/quartus/../ip/altera/nios2_ip/altera_nios2/cpu_lib -I /home/wilywyrm/altera/14.0/quartus/../ip/altera/nios2_ip/altera_nios2/nios_lib -I /home/wilywyrm/altera/14.0/quartus/../ip/altera/nios2_ip/altera_nios2 -I /home/wilywyrm/altera/14.0/quartus/../ip/altera/nios2_ip/altera_nios2 -- /home/wilywyrm/altera/14.0/quartus/../ip/altera/nios2_ip/altera_nios2/generate_rtl.epl --name=Video_System_CPU --dir=/tmp/alt6561_8089602860943877019.dir/0184_CPU_gen/ --quartus_bindir=/home/wilywyrm/altera/14.0/quartus/linux64 --verilog --config=/tmp/alt6561_8089602860943877019.dir/0184_CPU_gen//Video_System_CPU_processor_configuration.pl  --do_build_sim=0  ]
+Info: CPU: # 2015.05.06 01:36:28 (*) Starting Nios II generation
+Info: CPU: # 2015.05.06 01:36:28 (*)   Checking for plaintext license.
+Info: CPU: # 2015.05.06 01:36:30 (*)   Couldn't query license setup in Quartus directory /home/wilywyrm/altera/14.0/quartus/linux64
+Info: CPU: # 2015.05.06 01:36:30 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+Info: CPU: # 2015.05.06 01:36:30 (*)   LM_LICENSE_FILE environment variable is empty
+Info: CPU: # 2015.05.06 01:36:30 (*)   Plaintext license not found.
+Info: CPU: # 2015.05.06 01:36:30 (*)   No license required to generate encrypted Nios II/e.
+Info: CPU: # 2015.05.06 01:36:30 (*)   Elaborating CPU configuration settings
+Info: CPU: # 2015.05.06 01:36:31 (*)   Creating all objects for CPU
+Info: CPU: # 2015.05.06 01:36:32 (*)   Generating RTL from CPU objects
+Info: CPU: # 2015.05.06 01:36:32 (*)   Creating plain-text RTL
+Info: CPU: # 2015.05.06 01:36:33 (*) Done Nios II generation
+Info: CPU: Done RTL generation for module 'Video_System_CPU'
+Info: CPU: "Video_System" instantiated altera_nios2_qsys "CPU"
+Info: Char_Buffer_with_DMA: Starting Generation of Character Buffer
+Info: Char_Buffer_with_DMA: "Video_System" instantiated altera_up_avalon_video_character_buffer_with_dma "Char_Buffer_with_DMA"
+Info: Dual_Clock_FIFO: Starting Generation of the Dual Clock Buffer
+Info: Dual_Clock_FIFO: "Video_System" instantiated altera_up_avalon_video_dual_clock_buffer "Dual_Clock_FIFO"
+Info: Pixel_Buffer: Starting Generation of SRAM or SSRAM Controller
+Info: Pixel_Buffer: "Video_System" instantiated altera_up_avalon_sram "Pixel_Buffer"
+Info: Pixel_Buffer_DMA: Starting Generation of VGA Pixel Buffer
+Info: Pixel_Buffer_DMA: "Video_System" instantiated altera_up_avalon_video_pixel_buffer_dma "Pixel_Buffer_DMA"
+Info: Pixel_RGB_Resampler: Starting Generation of Video RGB Resampler
+Info: Pixel_RGB_Resampler: "Video_System" instantiated altera_up_avalon_video_rgb_resampler "Pixel_RGB_Resampler"
+Info: Pixel_Scaler: Starting Generation of Video Scaler
+Info: Pixel_Scaler: "Video_System" instantiated altera_up_avalon_video_scaler "Pixel_Scaler"
+Info: VGA_Controller: Starting Generation of VGA Controller
+Info: VGA_Controller: "Video_System" instantiated altera_up_avalon_video_vga_controller "VGA_Controller"
+Info: video_pll_0: "Video_System" instantiated altera_up_avalon_video_pll "video_pll_0"
+Info: keycode: Starting RTL generation for module 'Video_System_keycode'
+Info: keycode:   Generation command is [exec /home/wilywyrm/altera/14.0/quartus/linux64/perl/bin/perl -I /home/wilywyrm/altera/14.0/quartus/linux64/perl/lib -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin/europa -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin/perl_lib -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin -I /home/wilywyrm/altera/14.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/wilywyrm/altera/14.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- /home/wilywyrm/altera/14.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=Video_System_keycode --dir=/tmp/alt6561_8089602860943877019.dir/0192_keycode_gen/ --quartus_dir=/home/wilywyrm/altera/14.0/quartus --verilog --config=/tmp/alt6561_8089602860943877019.dir/0192_keycode_gen//Video_System_keycode_component_configuration.pl  --do_build_sim=0  ]
+Info: keycode: Done RTL generation for module 'Video_System_keycode'
+Info: keycode: "Video_System" instantiated altera_avalon_pio "keycode"
+Info: sdram_controller_0: Starting RTL generation for module 'Video_System_sdram_controller_0'
+Info: sdram_controller_0:   Generation command is [exec /home/wilywyrm/altera/14.0/quartus/linux64/perl/bin/perl -I /home/wilywyrm/altera/14.0/quartus/linux64/perl/lib -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin/europa -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin/perl_lib -I /home/wilywyrm/altera/14.0/quartus/sopc_builder/bin -I /home/wilywyrm/altera/14.0/quartus/../ip/altera/sopc_builder_ip/common -I /home/wilywyrm/altera/14.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- /home/wilywyrm/altera/14.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=Video_System_sdram_controller_0 --dir=/tmp/alt6561_8089602860943877019.dir/0193_sdram_controller_0_gen/ --quartus_dir=/home/wilywyrm/altera/14.0/quartus --verilog --config=/tmp/alt6561_8089602860943877019.dir/0193_sdram_controller_0_gen//Video_System_sdram_controller_0_component_configuration.pl  --do_build_sim=0  ]
+Info: sdram_controller_0: Done RTL generation for module 'Video_System_sdram_controller_0'
+Info: sdram_controller_0: "Video_System" instantiated altera_avalon_new_sdram_controller "sdram_controller_0"
+Info: sdram_clk: "Video_System" instantiated altpll "sdram_clk"
+Info: mm_interconnect_0: "Video_System" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: irq_mapper: "Video_System" instantiated altera_irq_mapper "irq_mapper"
+Info: rst_controller: "Video_System" instantiated altera_reset_controller "rst_controller"
+Info: video_pll: "video_pll_0" instantiated altera_up_altpll "video_pll"
+Info: reset_from_locked: "video_pll_0" instantiated altera_up_avalon_reset_from_locked_signal "reset_from_locked"
+Info: CPU_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "CPU_data_master_translator"
+Info: Char_Buffer_with_DMA_avalon_char_buffer_slave_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "Char_Buffer_with_DMA_avalon_char_buffer_slave_translator"
+Info: CPU_data_master_agent: "mm_interconnect_0" instantiated altera_merlin_master_agent "CPU_data_master_agent"
+Info: Char_Buffer_with_DMA_avalon_char_buffer_slave_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "Char_Buffer_with_DMA_avalon_char_buffer_slave_agent"
+Info: Char_Buffer_with_DMA_avalon_char_buffer_slave_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "Char_Buffer_with_DMA_avalon_char_buffer_slave_agent_rsp_fifo"
+Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: router_001: "mm_interconnect_0" instantiated altera_merlin_router "router_001"
+Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: router_003: "mm_interconnect_0" instantiated altera_merlin_router "router_003"
+Info: router_004: "mm_interconnect_0" instantiated altera_merlin_router "router_004"
+Info: router_006: "mm_interconnect_0" instantiated altera_merlin_router "router_006"
+Info: router_007: "mm_interconnect_0" instantiated altera_merlin_router "router_007"
+Info: Char_Buffer_with_DMA_avalon_char_buffer_slave_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "Char_Buffer_with_DMA_avalon_char_buffer_slave_burst_adapter"
+Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
+Info: cmd_demux_002: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_002"
+Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: cmd_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_001"
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: cmd_mux_003: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_003"
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: cmd_mux_004: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_004"
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: rsp_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_001"
+Info: rsp_demux_003: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_003"
+Info: rsp_demux_004: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_004"
+Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_001"
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_002"
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: CPU_data_master_to_Char_Buffer_with_DMA_avalon_char_buffer_slave_cmd_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "CPU_data_master_to_Char_Buffer_with_DMA_avalon_char_buffer_slave_cmd_width_adapter"
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: crosser: "mm_interconnect_0" instantiated altera_avalon_st_handshake_clock_crosser "crosser"
+Info: Reusing file /home/wilywyrm/Desktop/IP_Core_Demos/Video_Demos_using_Qsys/DE2/Example_3_Both_Buffers/verilog/Video_System/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: Video_System: Done "Video_System" with 48 modules, 80 files
+Info: ip-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

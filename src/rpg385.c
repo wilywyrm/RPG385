@@ -53,7 +53,7 @@ void initEvents(){
 	int* cI	;	// choice impacts (on happiness, hygiene, grades)
 
 	cTI = (int[4]) {0, 1, 2, 3};
-	cRI = (int[4]) {0, 1, 2, 3};
+	cRI = (int[4]) {1, 1, 2, 3};
 	cNI = (int[4]) {1, 1, 1, 1};
 	cI  = (int[12]) { 	0, 0, 0,
 						0, 0, 0,
