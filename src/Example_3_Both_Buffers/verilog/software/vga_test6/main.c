@@ -114,8 +114,22 @@ int main(void)
 	//flushPixels();
 	VGA_box (box_x1 * 4, box_y1 * 4, box_x2 * 4, box_y2 * 4, Orange);
 	VGA_text(box_x1+9, box_y1+4, "RPG385\0");
-	VGA_text(box_x1-1, box_y1+14, "Press any key to continue...\0");
-	waitPress();
+
+	int delay = 0;
+	while(!((*press & 0x1))){	// while no key pressed
+		delay++;
+		if(delay == 50000){
+			VGA_text(box_x1-1, box_y1+14, "                             \0");
+		}
+		else if (delay == 1){
+			VGA_text(box_x1-1, box_y1+14, "Press any key to continue...\0");
+		}
+		else if(delay == 100000)
+			delay = 0;
+
+	}
+	waitRelease();
+	//waitPress();
 
 
 
@@ -141,6 +155,7 @@ int main(void)
 					printChoices(curE);
 					VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, White);
 
+					delay = 0;
 					while(!((*press & 0x1) && (*keycode == ENT))){
 						if((*press & 0x1) && (*keycode == UP)){
 							int temp = choice;
@@ -161,6 +176,19 @@ int main(void)
 							waitRelease();
 
 						}
+
+						delay++;
+						if(delay == 40000){
+							//VGA_text(box_x1-1, box_y1+14, "                             \0");
+							VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, BOXCOLOR);
+						}
+						else if (delay == 1){
+							VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, White);
+							//VGA_text(box_x1-1, box_y1+14, "Press any key to continue...\0");
+						}
+						else if(delay == 80000)
+							delay = 0;
+
 					}
 					waitRelease();
 					VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, BOXCOLOR);
@@ -341,10 +369,10 @@ void initEvents(){
 	cTI = (int[4]) {20, 21, 22, 3};
 	cRI = (int[4]) {18, 18, 18, 18};
 	cNI = (int[4]) {9, 9, 9, 9};
-	cI  = (int[16]) { 	-15, -10, 15, 0,
-						10, 0, -10, 0,
-						-10, 0, 10, 0,
-						15, -5, -20, 2};
+	cI  = (int[16]) { 	-15, 0, -20, 0,
+						-15, 0, -20, 0,
+						-15, 0, -20, 0,
+						-15, 0, -20, 0};
 	ev[8] = Event_new(8, cTI, cRI, cNI, cI);
 
 	cTI = (int[4]) {23, 20, 24, 3};
