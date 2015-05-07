@@ -17,22 +17,23 @@ void VGA_box (int, int, int, int, short);
 volatile int * Pixel_DMA_controller = (int *) 0x10203040;	// DMA controller base address
 volatile char * character_buffer = (char *) 0x10200000;		// VGA character buffer
 volatile short * pixel_buffer = (short *) 0x10000000;		// VGA pixel buffer
-volatile char * keycode = (char *) 0x10203030;
-volatile char * press = (char *) 0x10203010;
+volatile char * keycode = (char *) 0x10203030;				// Keycode PIO address
+volatile char * press = (char *) 0x10203010;				// Keypress PIO address
 
 const short BGCOLOR = DarkGray;
 const short BOXCOLOR = MedGray;
-const int YPADDING = 8;
+const int YPADDING = 8;	// text padding
 const int XPADDING = 10;
-const int SCRWIDTH = 81;
+const int SCRWIDTH = 81;// screen dimensions in text columns/rows
 const int SCRHIGHT = 59;
-const int SCRPIXW = 319;
+const int SCRPIXW = 319;// screen dimensions in pixel width (320x240)
 const int SCRPIXH = 239;
 
-int curTextY;
-int choice = 0;
-int numChoices;
+int curTextY;	// the current Y position of the next text to be put on the screen
+int choice = 0;	// current choice
+int numChoices;	// choice count (if there are less than 4 valid choices), not used
 
+// keycodes
 const char UP = 0x75;
 const char DOWN = 0x72;
 const char LEFT = 0x6B;
@@ -40,6 +41,7 @@ const char RIGHT = 0x74;
 const char ENT = 0x5A;
 const char ESC = 0x76;
 
+// selector square constants
 const int SELXOFFSET = 25;
 const int SELYOFFSET = 110;
 const int SELWIDTH = 5;
@@ -58,17 +60,20 @@ Event* curE;
 
 int main(void)
 {
-	START:
+	START: // dirty GOTO
+	// init things
 	initEvents();
 	curE = ev[0];
 	choice = 0;
 	week = 0;
 
-	int TXTBOXX1 = 20;
+	// basically constants, for the position of the text background boxes
+	// can't put them with the global constants because they depend on each other
+	int TXTBOXX1 = 20;	// text box x positions (for both events and choices)
 	int TXTBOXX2 = SCRPIXW - TXTBOXX1;
-	int EVBOXY1 = 20;
+	int EVBOXY1 = 20;			// event box Y-positions
 	int EVBOXY2 = 70 + EVBOXY1;
-	int CHBOXY1 = EVBOXY2 + 10;
+	int CHBOXY1 = EVBOXY2 + 10;	// character box Y-position
 	int CHBOXY2 = 100 + CHBOXY1;
 
 	hap = 100;
@@ -109,12 +114,14 @@ int main(void)
 	//flushChar();
 	//flush();
 
+	// splash screen
 	initFrame();
 	//flushChar();
 	//flushPixels();
 	VGA_box (box_x1 * 4, box_y1 * 4, box_x2 * 4, box_y2 * 4, Orange);
 	VGA_text(box_x1+9, box_y1+4, "RPG385\0");
 
+	// flash "press any key to continue"
 	int delay = 0;
 	while(!((*press & 0x1))){	// while no key pressed
 		delay++;
@@ -139,45 +146,54 @@ int main(void)
 	//curTextY = YPADDING;
 	initFrame();
 	*(Pixel_DMA_controller) = 0;	// dummy write to start buffer swap process
-	while (1)
+	while (1)	// the game
 	{
-			while(week < 10){
+			while(week < 10){ // we only have 10 weeks
 				//addToScreen(XPADDING, "lol\0");
 				if ( (*(Pixel_DMA_controller+3) & 1) == 0){ // wait for Status register bit S == 0
 					//initFrame();
+					// make text background boxes
 					VGA_box(TXTBOXX1, EVBOXY1, TXTBOXX2, EVBOXY2, BOXCOLOR);
 					VGA_box(TXTBOXX1, CHBOXY1, TXTBOXX2, CHBOXY2, BOXCOLOR);
 					char buf[100];
 					sprintf(buf, "Week %i: \n\n\0", week+1);
-					addToScreen(XPADDING, buf);
-					addToScreen(XPADDING, eventTexts[curE->promptI]);
-					//addToScreen(XPADDING, "You wake up and look out to see a blanket of snow about a foot thick. \nThe chancellor sent out an email letting you know that class was NOT canceled today. \nWelcome back to campus.\0");
-					printChoices(curE);
+					addToScreen(XPADDING, buf);	// print week
+					addToScreen(XPADDING, eventTexts[curE->promptI]);	// print week event text
+					printChoices(curE);	// print event choices
+					// draw choice selector box
 					VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, White);
-
 					delay = 0;
+					// change choice and selector box while choice not finalized
 					while(!((*press & 0x1) && (*keycode == ENT))){
-						if((*press & 0x1) && (*keycode == UP)){
+
+						if((*press & 0x1) && (*keycode == UP)){	// handle up button
 							int temp = choice;
+							//change choice
 							choice--;
 							if(choice < 0)
 								choice = 3;
+							// erase old box
 							VGA_box(SELXOFFSET, SELYOFFSET+temp*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+temp*SELCHOICEHEIGHT, BOXCOLOR);
+							// draw new box
 							VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, White);
 							waitRelease();
 						}
-						else if((*press & 0x1) && (*keycode == DOWN)){
+						else if((*press & 0x1) && (*keycode == DOWN)){ // handle down button
 							int temp = choice;
+							// change choice
 							choice++;
 							if(choice > 3)
 								choice = 0;
+							// erase old box
 							VGA_box(SELXOFFSET, SELYOFFSET+temp*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+temp*SELCHOICEHEIGHT, BOXCOLOR);
+							// draw new box
 							VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, White);
 							waitRelease();
 
 						}
 
 						delay++;
+						// flash selector box
 						if(delay == 40000){
 							//VGA_text(box_x1-1, box_y1+14, "                             \0");
 							VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, BOXCOLOR);
@@ -191,13 +207,16 @@ int main(void)
 
 					}
 					waitRelease();
+					// erase selector box
 					VGA_box(SELXOFFSET, SELYOFFSET+choice*SELCHOICEHEIGHT, SELXOFFSET+SELWIDTH, SELYOFFSET+SELWIDTH+choice*SELCHOICEHEIGHT, BOXCOLOR);
+					// print game response to player choice selection
 					addToScreen(XPADDING, choiceResponses[((curE->choices)[choice]).responseI]);
+					// print adjustments to stats from that choice
 					char temp[100];
 					sprintf(temp, "\n%+i HAP, %+i HYG, %+i GRD, %+i DIF \0", ((curE->choices)[choice]).impacts[0], ((curE->choices)[choice]).impacts[1], ((curE->choices)[choice]).impacts[2], ((curE->choices)[choice]).impacts[3]);
 					addToScreen(XPADDING, temp);
 
-					// modify and clamp values
+					// modify and clamp values of modified stats
 					hap += ((curE->choices)[choice]).impacts[0];
 					hap = (hap > 100)? 100: hap;
 					hyg += ((curE->choices)[choice]).impacts[1];
@@ -209,9 +228,11 @@ int main(void)
 					addToScreen(XPADDING, "\nPress any key to continue...\0");
 					waitPress();
 
-					if(hap < 0 || hyg < 0 || grd < 0)
-						break;	// lose condition
+					// handle game over
+					if(hap < 0 || hyg < 0 || grd < 0) // lose condition
+						break;
 
+					// setup next week event
 					week++;
 					curE = ev[((curE->choices)[choice]).nextEventI];
 					//waitPress();
@@ -220,6 +241,9 @@ int main(void)
 					//flushChar();
 					//curTextY = YPADDING;
 					//flush();
+
+					/* Execute a swap buffer command. This will allow us to check if the screen has
+					 * been redrawn before generating a new animation frame. */
 					*(Pixel_DMA_controller) = 0;
 
 				}
@@ -232,25 +256,27 @@ int main(void)
 				delay = 0;
 			}*/
 
-			/* Execute a swap buffer command. This will allow us to check if the screen has
-			 * been redrawn before generating a new animation frame. */
+
 
 		}
 
+		// game over screen
 		flushChar();
 		curTextY = YPADDING;
 		// tally score
 		int score = (hap + hyg + grd) * diff;
+		// lose scenarios
 		if(hap < 0)
 			addToScreen(XPADDING, "Sadly you worked yourself to the bone this semester, \nand one day you just burned out from \nbeing unhappy all the time. \n\nLooks like you\'ll be taking a gap semester, buddy.\n\n\n\0");
 		else if(hyg < 0)
 			addToScreen(XPADDING, "You let yourself go, big time. \nAt first, people just gave you a big berth in the hallway, \nthen your friends stopped hanging out with you because of your smell, \nbut now the EPA came and sealed you off in your apartment. \n\nMaybe you can try again next semester, \nafter you\'ve been decontaminated?\n\n\n\0");
 		else if(grd < 0)
 			addToScreen(XPADDING, "It turns out if you flunk out of all your classes, \nyou get kicked out of them. \nWho knew? \n\nGuess you\'ll have to wait until next semester to try again.\n\n\n\0");
+		// win scenario
 		else
 			addToScreen(XPADDING, "Congrats, you made it through 385 while somehow keeping sane!\nWant to try it again? \n\n\n\0");
 
-
+		// print stats
 		char temp[100];
 		sprintf(temp, "Happiness: %i\0", hap);
 		addToScreen(XPADDING, temp);
@@ -260,6 +286,7 @@ int main(void)
 		addToScreen(XPADDING, temp);
 		sprintf(temp, "Total Score: %i\0", score);
 		addToScreen(XPADDING, temp);
+		// wait for key press to restart
 		addToScreen(XPADDING, "\nPress any key to play again...\0");
 		waitPress();
 		goto START;	// i am a bad programmer
@@ -268,6 +295,7 @@ int main(void)
 }
 
 
+// event constructor workaround because this is C
 Event* Event_new(int eventTextI, int choiceTextI[], int choiceResponsesI[], int choiceNextEventI[], int choiceImpacts[]){
 	Event* e = malloc(sizeof(Event));
 	e->promptI = eventTextI;
@@ -289,6 +317,7 @@ Event* Event_new(int eventTextI, int choiceTextI[], int choiceResponsesI[], int 
 	return e;
 }
 
+// initialize Events of the game to point to the strings in data.h for events/choices/responses
 void initEvents(){
 	int* cTI;	// choice text indices
 	int* cRI;	// choice response indices
@@ -386,6 +415,7 @@ void initEvents(){
 
 }
 
+// print choices of the event
 void printChoices(Event* e){
 	curTextY = 26;
 	//numChoices = 0;
@@ -415,6 +445,7 @@ void blinkText(int x, int y, char* text){
 	// implementation would work better with interrupts
 }
 
+// wait for a press of the "any" key
 void waitPress(){
 	int i = 0;
 	while(!((*press & 0x1))){	// while no key pressed
@@ -423,12 +454,18 @@ void waitPress(){
 	waitRelease();	// then wait for a release of the key
 }
 
+// wait for a release of all keys of the keyboard
 void waitRelease(){
 	int i = 0;
 	while(*press & 0x1){
 		i++;
 	}
 }
+
+// wrapper to handle adding text to the screen, with minimal protections
+// handles text wrapping
+// handles newlines on '\n' and end of string ('\0')
+// does NOT handle text Y going beyond screen bounds except by printing from the top
 
 void addToScreen(int x, char* text_ptr)
 {
@@ -486,7 +523,6 @@ void flush(){
 	flushChar();
 }
 
-// this function is cursed i think
 void flushPixels(){
 	VGA_box (0, 0, SCRPIXW, SCRPIXH, BGCOLOR);
 }
