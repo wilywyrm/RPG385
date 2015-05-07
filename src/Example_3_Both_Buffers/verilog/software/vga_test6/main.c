@@ -6,14 +6,6 @@
 void VGA_text (int, int, char *);
 void VGA_box (int, int, int, int, short);
 
-/********************************************************************************
- * This program demonstrates use of the character and pixel buffers
- *
- * It performs the following:
- * 	1. Draws a blue box on the VGA display, and places a text string inside
- * 	   the box. Also, moves the word ALTERA around the display, "bouncing" off
- * 	   the blue box and screen edges
-********************************************************************************/
 volatile int * Pixel_DMA_controller = (int *) 0x10203040;	// DMA controller base address
 volatile char * character_buffer = (char *) 0x10200000;		// VGA character buffer
 volatile short * pixel_buffer = (short *) 0x10000000;		// VGA pixel buffer
